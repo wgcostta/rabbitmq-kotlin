@@ -1,4 +1,4 @@
-package com.example.service
+package com.exemplo.service
 
 import com.exemplo.config.RabbitMQConfig
 import com.exemplo.dto.EventoDTO
