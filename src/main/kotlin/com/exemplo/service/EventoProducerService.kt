@@ -27,6 +27,18 @@ class EventoProducerService(
 
             logger.info("Publicando evento: {}", evento)
 
+            for (i in 1..1000) {
+                // Envia para o exchange fanout
+                // No fanout, a routing key é ignorada, mas vamos passar uma mesmo assim
+                evento.id = UUID.randomUUID().toString() // Gera um novo ID para cada iteração
+
+                rabbitTemplate.convertAndSend(
+                    RabbitMQConfig.FANOUT_EXCHANGE,
+                    "", // routing key vazia para fanout
+                    evento
+                )
+            }
+
             // Envia para o exchange fanout
             // No fanout, a routing key é ignorada, mas vamos passar uma mesmo assim
             rabbitTemplate.convertAndSend(
